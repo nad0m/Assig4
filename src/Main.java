@@ -30,11 +30,12 @@ public class Main
 	         };      
 		
 		BarcodeImage image = new BarcodeImage(sImageIn);
-		//DataMatrix newImage = new DataMatrix(image);
-
 		image.displayToConsole();
+		DataMatrix newImage = new DataMatrix(image);
+
 		
-		System.out.println(image.getPixel(26, 4));
+		
+
 		
 		
 	}

@@ -60,8 +60,6 @@ class BarcodeImage implements Cloneable
 				lineNumber--;
 			}
 		}
-		
-		cleanImage();
 			
 	}
 	
@@ -81,12 +79,19 @@ class BarcodeImage implements Cloneable
 		}
 		
 	}
-
-	
-
-	
-
-	
+	   
+	public Object clone()
+	{
+		try
+		{
+			BarcodeImage duplicate = (BarcodeImage)super.clone();
+			duplicate.image_data = (boolean[][])image_data.clone();
+			return duplicate;
+		}catch (CloneNotSupportedException e)
+	      	{
+	    		return null;
+	      	}
+	}	
 	
 	
 	
@@ -113,22 +118,7 @@ class BarcodeImage implements Cloneable
 	     }
 	}
 	
-	private void cleanImage()
-	{
-		
-		for (int i = BarcodeImage.MAX_HEIGHT-1; i >= 0 ; i--)
-		{
-			for (int j = 0; j < BarcodeImage.MAX_WIDTH; j++)
-			{
-				if (getPixel(i,j))
-				{
-					setPixel(i, j, false);
-					setPixel(i + 3, j - 5, true);					
-				}
-			}
-		}
 	
-	}
 	
 	
 }
