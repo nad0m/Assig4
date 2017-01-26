@@ -13,8 +13,9 @@ class DataMatrix
 	
 	private BarcodeImage image;
 	private String text;
-	private int actualWidth;
 	private int actualHeight;
+	private int actualWidth;
+	
 	
 	DataMatrix()
 	{
@@ -24,6 +25,8 @@ class DataMatrix
 	{
 		scan(image);
 		image.displayToConsole();//debug
+		System.out.println(actualHeight + " and " + actualWidth);
+		displayImageToConsole();
 	}
 	DataMatrix(String text)
 	{
@@ -75,10 +78,7 @@ class DataMatrix
 			}
 		}
 	
-	}
-	
-	
-	
+	}	
 	
 	private int computeSignalHeight() 
 	{
@@ -105,6 +105,46 @@ class DataMatrix
 				return j;
 			}
 		}
-		return j+1;
+		return j;
+	}
+	
+	public void displayImageToConsole()
+	{
+		horizontalLines();
+
+		for (int i = BarcodeImage.MAX_HEIGHT - actualHeight; i < BarcodeImage.MAX_HEIGHT; i++)
+		{
+			for (int j = 0; j <= actualWidth; j++)
+			{
+				if (j == 0)
+				{
+		               System.out.print("|");
+				}
+		        else if (j == actualWidth)
+		        {
+		               System.out.print("|");
+		        }
+				
+				
+		        if(image.getPixel(i, j))
+		        {
+		               System.out.print(BLACK_CHAR);
+		        }else{
+		        	System.out.print(WHITE_CHAR);
+		        }
+			}
+				
+			System.out.print("\n");
+		}
+		
+	}
+	
+	private void horizontalLines()
+	{
+		for (int i = 0; i < actualWidth+2; i++)
+		{
+			System.out.print("-");
+		}
+		System.out.print("\n");
 	}
 }
