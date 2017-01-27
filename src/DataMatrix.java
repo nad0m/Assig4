@@ -16,7 +16,11 @@ class DataMatrix implements BarcodeIO
 	private int actualHeight;
 	private int actualWidth;
 	
-	
+	/**
+	 * Default constructor that initializes all variables 
+	 * and creates an empty image.
+	 * 
+	 */
 	DataMatrix()
 	{
 		this.text = "";
@@ -24,15 +28,31 @@ class DataMatrix implements BarcodeIO
 	    this.actualHeight = 0;
 	    this.image = new BarcodeImage();
 	}
+	
+	/**
+	 * A constructor that scans an image.
+	 * 
+	 */
 	DataMatrix(BarcodeImage image) 
 	{
 		scan(image);
 	}
+	
+	/**
+	 * A constructor that reads given text input.
+	 * 
+	 */
 	DataMatrix(String text)
 	{
 		
 	}
 	
+	/**
+	 * Public method that creates a clone of the image
+	 * and then "cleans" it. Actual height and width of 
+	 * the barcode are also initialized.
+	 * 
+	 */
 	public boolean scan (BarcodeImage barcode)
 	{
 		try
@@ -50,6 +70,11 @@ class DataMatrix implements BarcodeIO
 		return true;
 	}
 	
+	/**
+	 * Private method that guarantees any input image to be
+	 * packed into the bottom-left corner.
+	 * 
+	 */
 	private void cleanImage()
 	{
 		boolean found = false;
@@ -75,8 +100,7 @@ class DataMatrix implements BarcodeIO
 		}
 	
 	}
-	
-	
+		
 	private void movePixelToLowerLeft(int row, int col, int heightOffset, int widthOffset)
 	{
 		// turns current pixel "off"
@@ -139,7 +163,7 @@ class DataMatrix implements BarcodeIO
 		
 	}
 	
-	private void printValues(int i)
+	private void printValues(int row)
 	{
 		for (int j = 0; j <= actualWidth; j++)
 		{
@@ -153,7 +177,7 @@ class DataMatrix implements BarcodeIO
 	        }
 			
 			
-	        if(image.getPixel(i, j))
+	        if(image.getPixel(row, j))
 	        {
 	               System.out.print(BLACK_CHAR);
 	        }else{
@@ -162,7 +186,11 @@ class DataMatrix implements BarcodeIO
 		}
 	}
 	
-
+	/**
+	 * Public method that computes the barcode and save it 
+	 * into text string.
+	 * 
+	 */
 	public boolean translateImageToText()
 	{
 		text = "";
@@ -180,10 +208,7 @@ class DataMatrix implements BarcodeIO
 		
 		return true;
 	}
-	
-	
-
-	
+		
 	private int getASCII(int col)
 	{
 		int sum = 0;
@@ -212,4 +237,18 @@ class DataMatrix implements BarcodeIO
 		}
 		System.out.print("\n");
 	}
+	
+	
+/*	-------- Still need to make these methods, preferably with helper methods --------
+ * 
+	public boolean readText(String text);
+	{
+		
+	}
+	public boolean generateImageFromText();
+	{
+		
+	}
+	
+	*/
 }
