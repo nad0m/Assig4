@@ -79,7 +79,8 @@ class DataMatrix
 			}
 		}
 	
-	}	
+	}
+	
 	
 	private int computeSignalHeight() 
 	{
@@ -115,71 +116,63 @@ class DataMatrix
 
 		for (int i = BarcodeImage.MAX_HEIGHT - actualHeight; i < BarcodeImage.MAX_HEIGHT; i++)
 		{
-			for (int j = 0; j <= actualWidth; j++)
-			{
-				if (j == 0)
-				{
-		               System.out.print("|");
-				}
-		        else if (j == actualWidth)
-		        {
-		               System.out.print("|");
-		        }
-				
-				
-		        if(image.getPixel(i, j))
-		        {
-		               System.out.print(BLACK_CHAR);
-		        }else{
-		        	System.out.print(WHITE_CHAR);
-		        }
-			}
+			printValues(i);
 				
 			System.out.print("\n");
 		}
 		
 	}
 	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	private void printValues(int i)
+	{
+		for (int j = 0; j <= actualWidth; j++)
+		{
+			if (j == 0)
+			{
+	               System.out.print("|");
+			}
+	        else if (j == actualWidth)
+	        {
+	               System.out.print("|");
+	        }
+			
+			
+	        if(image.getPixel(i, j))
+	        {
+	               System.out.print(BLACK_CHAR);
+	        }else{
+	        	System.out.print(WHITE_CHAR);
+	        }
+		}
+	}
 	
 	public boolean translateImageToText()
 	{
 		String message = "";
-		int sum = 0;
-		int exponent = 0;
+
 		
 		for (int i = 1; i < actualWidth-1; i++)
-		{
-			for (int j = BarcodeImage.MAX_HEIGHT-2; j > 20; j--, exponent++)
-			{
-				if (image.getPixel(j, i))
-				{
-					sum += getASCII(exponent);					
-				}				
-			}
-			
-			message += (char) sum;
-			sum = 0;
-			exponent = 0;			
+		{			
+			message += (char) getASCII(i);		
 		}
 		
 		System.out.println(message);
 		return true;
 	}
 	
-	private int getASCII(int exponent)
+	private int getASCII(int i)
 	{
-		return (int) Math.pow(2, exponent);
+		int sum = 0;
+		int exponent = 0;
+		
+		for (int j = BarcodeImage.MAX_HEIGHT-2; j > BarcodeImage.MAX_HEIGHT-actualHeight; j--, exponent++)
+		{
+			if (image.getPixel(j, i))
+			{
+				sum += (int) Math.pow(2, exponent);					
+			}				
+		}
+		return sum;
 	}
 	
 	

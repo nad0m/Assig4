@@ -92,11 +92,7 @@ class BarcodeImage implements Cloneable
 	    		return null;
 	      	}
 	}	
-	
-	
-	
-	
-	
+		
 	
 	// Debugging purposes
 
