@@ -69,6 +69,7 @@ class BarcodeImage implements Cloneable
 		this.image_data[row][col] = value;
 		return true;
 	}
+	
 	public boolean getPixel(int row, int col)
 	{
 		if (( row >= 0 && row < MAX_HEIGHT) && (col >= 0 && col < MAX_WIDTH))

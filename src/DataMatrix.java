@@ -6,7 +6,7 @@
  * @author BigMac
  *
  */
-class DataMatrix
+class DataMatrix implements BarcodeIO
 {
 	public static final char BLACK_CHAR = '*';
 	public static final char WHITE_CHAR = ' '; 
@@ -19,15 +19,14 @@ class DataMatrix
 	
 	DataMatrix()
 	{
-		
+		this.text = "";
+	    this.actualWidth = 0;
+	    this.actualHeight = 0;
+	    this.image = new BarcodeImage();
 	}
 	DataMatrix(BarcodeImage image) 
 	{
 		scan(image);
-		image.displayToConsole();//debug
-		System.out.println(actualHeight + " and " + actualWidth);
-		displayImageToConsole();
-		translateImageToText();
 	}
 	DataMatrix(String text)
 	{
@@ -63,22 +62,28 @@ class DataMatrix
 			{
 				if (image.getPixel(i,j) && found == false)
 				{
-					found = true;					
+					found = true;	
 					heightOffset = BarcodeImage.MAX_HEIGHT - 1 - i;
 					widthOffset = j; 
 				}
 				
-				if (image.getPixel(i,j) && found == true)
+				if (image.getPixel(i, j) && found)
 				{
-					// turns current pixel "off"
-					image.setPixel(i, j, false);
-					
-					// move pixel to bottom-left based on offset values
-					image.setPixel(i + heightOffset, j - widthOffset, true);
+					movePixelToLowerLeft(i, j, heightOffset, widthOffset);
 				}				
 			}
 		}
 	
+	}
+	
+	
+	private void movePixelToLowerLeft(int row, int col, int heightOffset, int widthOffset)
+	{
+		// turns current pixel "off"
+		image.setPixel(row, col, false);
+		
+		// move pixel to bottom-left based on offset values
+		image.setPixel(row + heightOffset, col - widthOffset, true);
 	}
 	
 	
@@ -108,6 +113,17 @@ class DataMatrix
 			}
 		}
 		return j;
+	}
+	
+
+	public int getActualHeight()
+	{
+		return actualHeight;
+	}
+	   
+	public int getActualWidth()
+	{
+		return actualWidth;
 	}
 	
 	public void displayImageToConsole()
@@ -146,38 +162,47 @@ class DataMatrix
 		}
 	}
 	
+
 	public boolean translateImageToText()
 	{
-		String message = "";
+		text = "";
+		
+		if (image == null)
+		{
+			return false;
+		}
 
 		
 		for (int i = 1; i < actualWidth-1; i++)
 		{			
-			message += (char) getASCII(i);		
+			text += (char) getASCII(i);		
 		}
 		
-		System.out.println(message);
 		return true;
 	}
 	
-	private int getASCII(int i)
+	
+
+	
+	private int getASCII(int col)
 	{
 		int sum = 0;
 		int exponent = 0;
 		
 		for (int j = BarcodeImage.MAX_HEIGHT-2; j > BarcodeImage.MAX_HEIGHT-actualHeight; j--, exponent++)
 		{
-			if (image.getPixel(j, i))
+			if (image.getPixel(j, col))
 			{
 				sum += (int) Math.pow(2, exponent);					
 			}				
 		}
 		return sum;
+	}	
+
+	public void displayTextToConsole()
+	{
+		System.out.println(text);
 	}
-	
-	
-	
-	
 	
 	private void horizontalLines()
 	{
