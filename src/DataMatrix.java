@@ -27,6 +27,7 @@ class DataMatrix
 		image.displayToConsole();//debug
 		System.out.println(actualHeight + " and " + actualWidth);
 		displayImageToConsole();
+		translateImageToText();
 	}
 	DataMatrix(String text)
 	{
@@ -138,6 +139,52 @@ class DataMatrix
 		}
 		
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public boolean translateImageToText()
+	{
+		String message = "";
+		int sum = 0;
+		int exponent = 0;
+		
+		for (int i = 1; i < actualWidth-1; i++)
+		{
+			for (int j = BarcodeImage.MAX_HEIGHT-2; j > 20; j--, exponent++)
+			{
+				if (image.getPixel(j, i))
+				{
+					sum += getASCII(exponent);					
+				}				
+			}
+			
+			message += (char) sum;
+			sum = 0;
+			exponent = 0;			
+		}
+		
+		System.out.println(message);
+		return true;
+	}
+	
+	private int getASCII(int exponent)
+	{
+		return (int) Math.pow(2, exponent);
+	}
+	
+	
+	
+	
 	
 	private void horizontalLines()
 	{
