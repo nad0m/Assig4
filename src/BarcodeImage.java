@@ -137,7 +137,7 @@ class BarcodeImage implements Cloneable
                System.out.print('*');
             } else
             {
-               System.out.print('`');
+               System.out.print(' ');
             }
          }
 

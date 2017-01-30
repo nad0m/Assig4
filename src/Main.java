@@ -64,12 +64,16 @@ public class Main
 		      dm.translateImageToText();
 		      dm.displayTextToConsole();
 		      dm.displayImageToConsole();
-		    /*  
+		    
 		      // create your own message
 		      dm.readText("What a great resume builder this is!");
 		      dm.generateImageFromText();
 		      dm.displayTextToConsole();
 		      dm.displayImageToConsole();
-		*/
+		      
+		      //more test
+		    //  dm.translateImageToText();
+		    //  dm.displayTextToConsole();
+		
 	}
 }
