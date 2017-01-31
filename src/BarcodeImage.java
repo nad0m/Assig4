@@ -20,16 +20,8 @@ class BarcodeImage implements Cloneable
    public BarcodeImage()
    {
       this.image_data = new boolean[MAX_HEIGHT][MAX_WIDTH];
-
       // Generating blank 2D array
-      for (int i = 0; i < MAX_HEIGHT; i++)
-      {
-         for (int j = 0; j < MAX_WIDTH; j++)
-         {
-            image_data[i][j] = false;
-         }
-      }
-
+      initBlankImage();
    }
 
    /**
@@ -39,32 +31,34 @@ class BarcodeImage implements Cloneable
    public BarcodeImage(String[] str_data)
    {
       this.image_data = new boolean[MAX_HEIGHT][MAX_WIDTH];
-
-      int lineNumber = str_data.length - 1;
-
-      // begin at bottom left corner
-      for (int i = MAX_HEIGHT - 1; i >= 0; i--)
+      if (checkSize(str_data))
       {
-         for (int j = 0; j < MAX_WIDTH; j++)
+         int lineNumber = str_data.length - 1;
+
+         // begin at bottom left corner
+         for (int i = MAX_HEIGHT - 1; i >= 0; i--)
          {
-            if (j < str_data[lineNumber].length() && lineNumber >= 0)
+            for (int j = 0; j < MAX_WIDTH; j++)
             {
-               if (str_data[lineNumber].charAt(j) == ' ')
+               if (j < str_data[lineNumber].length() && lineNumber >= 0)
                {
-                  setPixel(i, j, false);
+                  if (str_data[lineNumber].charAt(j) == ' ')
+                  {
+                     setPixel(i, j, false);
+                  } else
+                  {
+                     setPixel(i, j, true);
+                  }
                } else
                {
-                  setPixel(i, j, true);
+                  setPixel(i, j, false);
                }
-            } else
-            {
-               setPixel(i, j, false);
             }
-         }
 
-         if (lineNumber > 0)
-         {
-            lineNumber--;
+            if (lineNumber > 0)
+            {
+               lineNumber--;
+            }
          }
       }
 
@@ -147,4 +141,47 @@ class BarcodeImage implements Cloneable
       }
    }
 
+   /**
+    * initializes a blanks image
+    */
+   private void initBlankImage()
+   {
+      for (int i = 0; i < MAX_HEIGHT; i++)
+      {
+         for (int j = 0; j < MAX_WIDTH; j++)
+         {
+            image_data[i][j] = false;
+         }
+      }
+   }
+
+   private boolean checkSize(String[] data)
+   {
+      if (data != null)
+      {
+         if (data.length > MAX_HEIGHT)
+         {
+            return false;
+         } else
+         {
+            for (int i = 0; i < data.length; i++)
+            {
+               if(data[i]!= null){
+               if (data[i].length() > MAX_WIDTH)
+               {
+                  return false;
+               }
+            }else{
+                  return false;
+               }
+         
+      }
+         }
+      }else
+      {
+         return false;
+      }
+      return true;
+   }
 }
+   }
