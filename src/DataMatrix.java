@@ -40,7 +40,7 @@ class DataMatrix implements BarcodeIO
 
    /**
     * A constructor that reads given text input.
-    * 
+    * @param text
     */
    DataMatrix(String text)
    {
@@ -50,7 +50,6 @@ class DataMatrix implements BarcodeIO
       // this is for testing.
       generateImageFromText();
       scan(image);
-
    }
 
    /**
@@ -106,8 +105,15 @@ class DataMatrix implements BarcodeIO
 
    }
 
+   /**
+    * Translates the current pxel to the lower left.
+    * @param row
+    * @param col
+    * @param heightOffset
+    * @param widthOffset
+    */
    private void movePixelToLowerLeft(int row, int col, int heightOffset,
-      int widthOffset)
+     int widthOffset)
    {
       // turns current pixel "off"
       image.setPixel(row, col, false);
@@ -116,6 +122,10 @@ class DataMatrix implements BarcodeIO
       image.setPixel(row + heightOffset, col - widthOffset, true);
    }
 
+   /**
+    * Computes the signal height
+    * @return
+    */
    private int computeSignalHeight()
    {
       int height = 0;
@@ -131,7 +141,7 @@ class DataMatrix implements BarcodeIO
    }
 
    /**
-    * 
+    * Computes the signal Width
     * @return
     */
    private int computeSignalWidth()
@@ -147,16 +157,27 @@ class DataMatrix implements BarcodeIO
       return j;
    }
 
+   /**
+    * returns the actualHeight
+    * @return the height of the data.
+    */
    public int getActualHeight()
    {
       return actualHeight;
    }
 
+   /**
+    * returns the width of the data.
+    * @return actual data width
+    */
    public int getActualWidth()
    {
       return actualWidth;
    }
 
+   /**
+    * Displays the image to console.
+    */
    public void displayImageToConsole()
    {
       horizontalLines();
@@ -170,6 +191,10 @@ class DataMatrix implements BarcodeIO
 
    }
 
+   /**
+    * Prints the values in a row.
+    * @param row to be printed
+    */
    private void printValues(int row)
    {
       for (int j = 0; j <= actualWidth; j++)
@@ -337,6 +362,7 @@ class DataMatrix implements BarcodeIO
       if (row % 2 == 1)
       {
          image.setPixel(row, text.length() + 1, true);
+         
       }
    }
 }
