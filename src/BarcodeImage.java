@@ -16,7 +16,7 @@ class BarcodeImage implements Cloneable {
 	public BarcodeImage() {
 		this.image_data = new boolean[MAX_HEIGHT][MAX_WIDTH];
 		// Generating blank 2D array
-		initBlankImage();
+		clearImage();
 	}
 
 	/**
@@ -118,7 +118,7 @@ class BarcodeImage implements Cloneable {
 	/**
 	 * initializes a blanks image
 	 */
-	private void initBlankImage() {
+	private void clearImage() {
 		for (int i = 0; i < MAX_HEIGHT; i++) {
 			for (int j = 0; j < MAX_WIDTH; j++) {
 				image_data[i][j] = false;
