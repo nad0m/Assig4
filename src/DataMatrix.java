@@ -124,7 +124,7 @@ class DataMatrix implements BarcodeIO {
 			if (image.getPixel(BarcodeImage.MAX_HEIGHT - 1, j) == false) {
 				;
 				System.out.println("Width = " + j);
-				return j+1;
+				return j + 1;
 			}
 		}
 		return j;
@@ -211,7 +211,7 @@ class DataMatrix implements BarcodeIO {
 	 * sets the text to be translated.
 	 */
 	public boolean readText(String text) {
-		actualWidth = text.length()+2;
+		actualWidth = text.length() + 2;
 		actualHeight = 10;
 		this.text = text;
 		return this.text == text;
@@ -221,37 +221,37 @@ class DataMatrix implements BarcodeIO {
 	 * 
 	 */
 	public boolean generateImageFromText() {
-		char [] textChars = text.toCharArray();
-		int col = 1;
 		creatClosedLimitationLine();
-		for(char c : textChars){
-			int charToConvert = (int)c;
-		for(int row = 8; row > 0; row--){
-			//add this part to closedLimitationLines Method.	
-			if((charToConvert & 1) == 1){
-				image.setPixel(row, col, true);
-				charToConvert >>=1;
-			}
-			else{
-				image.setPixel(row, col, false);
-				charToConvert >>=1;
-			}
-		}
-		col++;
+		for (int col = 1; col < text.length() + 1; col++) {
+			writeCharToCol(col);
 		}
 		return true;
+	}
+	
+	private void writeCharToCol(int col){
+		int charToConvert = (int) text.charAt(col-1);
+		for (int row = 8; row > 0; row--) {
+			//Check if bit is set.
+			if ((charToConvert & 1) == 1) {
+				image.setPixel(row, col, true);				
+			} else {
+				image.setPixel(row, col, false);
+			}
+			//shift bits
+			charToConvert >>= 1;
+		}
 	}
 
 	private void creatClosedLimitationLine() {
 		for (int row = 9; row >= 0; row--) {
-			for (int col = 0; col < text.length()+1; col++) {
+			for (int col = 0; col < text.length() + 1; col++) {
 				if (row == 9 || (row == 0 && col % 2 == 0)) {
 					image.setPixel(row, col, true);
 				}
 			}
 			image.setPixel(row, 0, true);
 			if (row % 2 == 1) {
-				image.setPixel(row, text.length()+1, true);
+				image.setPixel(row, text.length() + 1, true);
 			}
 		}
 		image.displayToConsole();
