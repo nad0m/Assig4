@@ -166,22 +166,23 @@ class BarcodeImage implements Cloneable
          {
             for (int i = 0; i < data.length; i++)
             {
-               if(data[i]!= null){
-               if (data[i].length() > MAX_WIDTH)
+               if (data[i] != null)
+               {
+                  if (data[i].length() > MAX_WIDTH)
+                  {
+                     return false;
+                  }
+               } else
                {
                   return false;
                }
-            }else{
-                  return false;
-               }
-         
-      }
+
+            }
          }
-      }else
+      } else
       {
          return false;
       }
       return true;
    }
 }
-   }
