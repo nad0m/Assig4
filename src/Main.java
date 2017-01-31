@@ -64,6 +64,7 @@ public class Main
       // create your own message
       dm.readText("What a great resume builder this is!");
       dm.generateImageFromText();
+      System.out.println("step 2:");
       dm.displayTextToConsole();
       dm.displayImageToConsole();
 

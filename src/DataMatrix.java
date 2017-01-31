@@ -40,13 +40,13 @@ class DataMatrix implements BarcodeIO
 
    /**
     * A constructor that reads given text input.
+    * 
     * @param text
     */
    DataMatrix(String text)
    {
       this();
       readText(text);
-
       // this is for testing.
       generateImageFromText();
       scan(image);
@@ -107,13 +107,14 @@ class DataMatrix implements BarcodeIO
 
    /**
     * Translates the current pxel to the lower left.
+    * 
     * @param row
     * @param col
     * @param heightOffset
     * @param widthOffset
     */
    private void movePixelToLowerLeft(int row, int col, int heightOffset,
-     int widthOffset)
+      int widthOffset)
    {
       // turns current pixel "off"
       image.setPixel(row, col, false);
@@ -124,6 +125,7 @@ class DataMatrix implements BarcodeIO
 
    /**
     * Computes the signal height
+    * 
     * @return
     */
    private int computeSignalHeight()
@@ -142,6 +144,7 @@ class DataMatrix implements BarcodeIO
 
    /**
     * Computes the signal Width
+    * 
     * @return
     */
    private int computeSignalWidth()
@@ -159,6 +162,7 @@ class DataMatrix implements BarcodeIO
 
    /**
     * returns the actualHeight
+    * 
     * @return the height of the data.
     */
    public int getActualHeight()
@@ -168,6 +172,7 @@ class DataMatrix implements BarcodeIO
 
    /**
     * returns the width of the data.
+    * 
     * @return actual data width
     */
    public int getActualWidth()
@@ -182,7 +187,8 @@ class DataMatrix implements BarcodeIO
    {
       horizontalLines();
 
-      for (int i = BarcodeImage.MAX_HEIGHT - actualHeight; i < BarcodeImage.MAX_HEIGHT; i++)
+      for (int i = BarcodeImage.MAX_HEIGHT
+         - actualHeight; i < BarcodeImage.MAX_HEIGHT; i++)
       {
          printValues(i);
 
@@ -193,7 +199,9 @@ class DataMatrix implements BarcodeIO
 
    /**
     * Prints the values in a row.
-    * @param row to be printed
+    * 
+    * @param row
+    *           to be printed
     */
    private void printValues(int row)
    {
@@ -276,6 +284,7 @@ class DataMatrix implements BarcodeIO
     */
    public boolean readText(String text)
    {
+      image = new BarcodeImage();
       actualWidth = text.length() + 2;
       actualHeight = 10;
       this.text = text;
@@ -287,6 +296,7 @@ class DataMatrix implements BarcodeIO
     */
    public boolean generateImageFromText()
    {
+      System.out.println(text);
       creatLimitationLines();
       for (int col = 1; col < text.length() + 1; col++)
       {
@@ -362,7 +372,7 @@ class DataMatrix implements BarcodeIO
       if (row % 2 == 1)
       {
          image.setPixel(row, text.length() + 1, true);
-         
+
       }
    }
 }
