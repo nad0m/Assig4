@@ -42,11 +42,11 @@ class DataMatrix implements BarcodeIO {
 	DataMatrix(String text) {
 		this();
 		readText(text);
-		
-	    //this is for testing.
+
+		// this is for testing.
 		generateImageFromText();
 		scan(image);
-		
+
 	}
 
 	/**
@@ -114,12 +114,17 @@ class DataMatrix implements BarcodeIO {
 		return height;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private int computeSignalWidth() {
 		int j = 0;
-
 		for (j = 0; j < BarcodeImage.MAX_WIDTH; j++) {
 			if (image.getPixel(BarcodeImage.MAX_HEIGHT - 1, j) == false) {
-				return j;
+				;
+				System.out.println("Width = " + j);
+				return j+1;
 			}
 		}
 		return j;
@@ -206,23 +211,23 @@ class DataMatrix implements BarcodeIO {
 	 * sets the text to be translated.
 	 */
 	public boolean readText(String text) {
-		actualWidth =text.length();
 		actualHeight = 10;
 		this.text = text;
 		return this.text == text;
 	}
-	
+
+	/**
+	 * 
+	 */
 	public boolean generateImageFromText() {
 		char [] textChars = text.toCharArray();
 		int col = 1;
 		creatClosedLimitationLine();
 		for(char c : textChars){
 			int charToConvert = (int)c;
-		for(int row = 9; row >= 0; row--){
-			if(row == 9 || row == 0){
-				image.setPixel(row, col, true);
-			}
-			else if((charToConvert & 1) ==	1){
+		for(int row = 8; row > 0; row--){
+			//add this part to closedLimitationLines Method.	
+			if((charToConvert & 1) == 1){
 				image.setPixel(row, col, true);
 				charToConvert >>=1;
 			}
@@ -233,15 +238,21 @@ class DataMatrix implements BarcodeIO {
 		}
 		col++;
 		}
-		computeSignalWidth();
-		computeSignalHeight();
 		return true;
 	}
 
 	private void creatClosedLimitationLine() {
-		for (int i = 0; i < 10; i++) {
-			image.setPixel(i, 0 , true);
+		for (int row = 9; row >= 0; row--) {
+			for (int col = 0; col < text.length()+1; col++) {
+				if (row == 9 || (row == 0 && col % 2 == 0)) {
+					image.setPixel(row, col, true);
+				}
+			}
+			image.setPixel(row, 0, true);
+			if (row % 2 == 1) {
+				image.setPixel(row, text.length()+1, true);
+			}
 		}
-		
+		image.displayToConsole();
 	}
 }
