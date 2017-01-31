@@ -141,9 +141,7 @@ class DataMatrix implements BarcodeIO
       {
          if (image.getPixel(BarcodeImage.MAX_HEIGHT - 1, j) == false)
          {
-            ;
-            System.out.println("Width = " + j);
-            return j + 1;
+            return j;
          }
       }
       return j;
@@ -311,6 +309,11 @@ class DataMatrix implements BarcodeIO
       }
    }
 
+   /**
+    * creates the horizontal Open Borderline and Closed Limitation Line
+    * 
+    * @param row
+    */
    private void createHorizontalLimitLine(int row)
    {
       for (int col = 0; col < text.length() + 1; col++)
@@ -323,6 +326,11 @@ class DataMatrix implements BarcodeIO
 
    }
 
+   /**
+    * marks a point on the Vertical Limitation line and Open Border Line
+    * 
+    * @param row
+    */
    private void createVerticalLimitationMark(int row)
    {
       image.setPixel(row, 0, true);

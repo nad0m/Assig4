@@ -71,10 +71,11 @@ class BarcodeImage implements Cloneable
    }
 
    /**
-    * Mutator for a particular pixel.
     * 
     * @param row
-    *           , col, value
+    * @param col
+    * @param value
+    * @return
     */
    public boolean setPixel(int row, int col, boolean value)
    {
