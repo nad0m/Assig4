@@ -89,6 +89,7 @@ class BarcodeImage implements Cloneable
 
    /**
     * accesses individual pixel
+    * 
     * @param row
     * @param col
     * @return
