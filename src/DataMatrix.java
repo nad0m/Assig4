@@ -211,6 +211,7 @@ class DataMatrix implements BarcodeIO {
 	 * sets the text to be translated.
 	 */
 	public boolean readText(String text) {
+		actualWidth = text.length()+2;
 		actualHeight = 10;
 		this.text = text;
 		return this.text == text;
