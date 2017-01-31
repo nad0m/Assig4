@@ -303,6 +303,7 @@ class DataMatrix implements BarcodeIO
          writeCharToCol(col);
       }
       // Not sure what to do here.
+      scan(image);
       return true;
    }
 
@@ -327,6 +328,7 @@ class DataMatrix implements BarcodeIO
          // shift bits
          charToConvert >>= 1;
       }
+     // image.displayToConsole();
    }
 
    /**
