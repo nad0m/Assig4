@@ -218,16 +218,21 @@ class DataMatrix implements BarcodeIO {
 	}
 
 	/**
-	 * 
+	 * creates an image from the text
 	 */
 	public boolean generateImageFromText() {
-		creatClosedLimitationLine();
+		creatLimitationLines();
 		for (int col = 1; col < text.length() + 1; col++) {
 			writeCharToCol(col);
 		}
+		//Not sure what to do here.
 		return true;
 	}
 	
+	/**
+	 * method to set the pixels of the image.
+	 * @param col
+	 */
 	private void writeCharToCol(int col){
 		int charToConvert = (int) text.charAt(col-1);
 		for (int row = 8; row > 0; row--) {
@@ -242,7 +247,10 @@ class DataMatrix implements BarcodeIO {
 		}
 	}
 
-	private void creatClosedLimitationLine() {
+	/**
+	 * creates the Closed Limitation Lines and Open border Lines
+	 */
+	private void creatLimitationLines() {
 		for (int row = 9; row >= 0; row--) {
 			for (int col = 0; col < text.length() + 1; col++) {
 				if (row == 9 || (row == 0 && col % 2 == 0)) {
