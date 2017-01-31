@@ -72,8 +72,8 @@ public class Main
 		      dm.displayImageToConsole();
 		      
 		      //more test
-		    //  dm.translateImageToText();
-		    //  dm.displayTextToConsole();
+		      dm.translateImageToText();
+		      dm.displayTextToConsole();
 		
 	}
 }

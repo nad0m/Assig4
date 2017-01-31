@@ -28,6 +28,7 @@ public class TestDataMatrix {
 	
 	
 	
+	
 	@Test
 	public void testGernerateImageFromText() {
 		DataMatrix dm = new DataMatrix("You did it!  Great work.  Celebrate.");
@@ -36,8 +37,8 @@ public class TestDataMatrix {
 		dm.translateImageToText();
 		dm.displayImageToConsole();
 		
-		dm.translateImageToText();
-		dm.displayTextToConsole();
+		//dm.translateImageToText();
+	//	dm.displayTextToConsole();
 		//assertEquals("You did it!  Great work.  Celebrate.", dm.displayTextToConsole());
 	}
 
