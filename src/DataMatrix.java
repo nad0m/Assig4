@@ -45,6 +45,9 @@ class DataMatrix implements BarcodeIO
       this();
       readText(text);
       generateImageFromText();
+      this.displayImageToConsole();
+      
+      translateImageToText();
      // scan(image);
    }
 
@@ -242,6 +245,11 @@ class DataMatrix implements BarcodeIO
       return true;
    }
 
+   /**
+    * returns the asci value of this column
+    * @param col
+    * @return
+    */
    private int getASCII(int col)
    {
       int sum = 0;
@@ -280,10 +288,10 @@ class DataMatrix implements BarcodeIO
     */
    public boolean readText(String text)
    {
-      image = new BarcodeImage();
+      this.text = text;
+      this.image = new BarcodeImage();
       actualWidth = text.length() + 2;
       actualHeight = 10;
-      this.text = text;
       return this.text == text;
    }
 
@@ -292,13 +300,12 @@ class DataMatrix implements BarcodeIO
     */
    public boolean generateImageFromText()
    {
-      System.out.println(text);
+      //System.out.println(text);
       creatLimitationLines();
       for (int col = 1; col < text.length() + 1; col++)
       {
          writeCharToCol(col);
       }
-      // Not sure what to do here.
       scan(image);
       return true;
    }

@@ -28,11 +28,12 @@ public class TestDataMatrix
    @Test
    public void testGernerateImageFromText()
    {
-      DataMatrix dm = new DataMatrix("What a great resume builder this is!");
-     // dm.displayTextToConsole();
+      DataMatrix dm = new DataMatrix("CSUMB CSIT online program is top notch.");
+     //dm.displayTextToConsole();
+      
       dm.generateImageFromText();
      dm.translateImageToText();
-      dm.displayImageToConsole();
+     dm.displayImageToConsole();
 
       dm.displayTextToConsole();
       // assertEquals("You did it! Great work. Celebrate.",
@@ -40,3 +41,4 @@ public class TestDataMatrix
    }
 
 }
+
