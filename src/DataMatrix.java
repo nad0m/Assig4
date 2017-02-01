@@ -20,10 +20,10 @@ class DataMatrix implements BarcodeIO
     */
    DataMatrix()
    {
+      this.image = new BarcodeImage();
       this.text = "";
       this.actualWidth = 0;
       this.actualHeight = 0;
-      this.image = new BarcodeImage();
    }
 
    /**
