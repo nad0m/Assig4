@@ -251,6 +251,7 @@ class BarcodeImage implements Cloneable {
    }
 }
 
+
 /**
  * The DataMatrix class contains a BarcodeImage and a text string for the encoded message. 
  *
@@ -513,6 +514,9 @@ class DataMatrix implements BarcodeIO
       return sum;
    }
 
+   /**
+    * displays the text message.
+    */
    public void displayTextToConsole()
    {
       System.out.println(text);
@@ -547,14 +551,12 @@ class DataMatrix implements BarcodeIO
     */
    public boolean generateImageFromText()
    {
-      //System.out.println(text);
       creatLimitationLines();
       for (int col = 1; col < text.length() + 1; col++)
       {
          writeCharToCol(col);
       }
-      scan(image);
-      return true;
+      return scan(image);
    }
 
    /**
@@ -578,7 +580,6 @@ class DataMatrix implements BarcodeIO
          // shift bits
          charToConvert >>= 1;
       }
-     // image.displayToConsole();
    }
 
    /**
@@ -628,3 +629,44 @@ class DataMatrix implements BarcodeIO
       }
    }
 }
+/*
+CSUMB CSIT online program is top notch.
+-------------------------------------------
+|* * * * * * * * * * * * * * * * * * * * *| 
+|*                                       *| 
+|****** **** ****** ******* ** *** *****  | 
+|*     *    ******************************| 
+|* **    * *        **  *    * * *   *    | 
+|*   *    *  *****    *   * *   *  **  ***| 
+|*  **     * *** **   **  *    **  ***  * | 
+|***  * **   **  *   ****    *  *  ** * **| 
+|*****  ***  *  * *   ** ** **  *   * *   | 
+|*****************************************| 
+You did it!  Great work.  Celebrate.
+----------------------------------------
+|* * * * * * * * * * * * * * * * * * * | 
+|*                                    *| 
+|**** *** **   ***** ****   *********  | 
+|* ************ ************ **********| 
+|** *      *    *  * * *         * *   | 
+|***   *  *           * **    *      **| 
+|* ** * *  *   * * * **  *   ***   *** | 
+|* *           **    *****  *   **   **| 
+|****  *  * *  * **  ** *   ** *  * *  | 
+|**************************************| 
+step 2:
+What a great resume builder this is!
+----------------------------------------
+|* * * * * * * * * * * * * * * * * * * | 
+|*                                    *| 
+|***** * ***** ****** ******* **** **  | 
+|* ************************************| 
+|**  *    *  * * **    *    * *  *  *  | 
+|* *               *    **     **  *  *| 
+|**  *   * * *  * ***  * ***  *        | 
+|**      **    * *    *     *    *  * *| 
+|** *  * * **   *****  **  *    ** *** | 
+|**************************************| 
+What a great resume builder this is!
+
+*/
