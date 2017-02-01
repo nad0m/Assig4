@@ -1,6 +1,6 @@
 
 /**
- * @author BigMac
+ * The DataMatrix class contains a BarcodeImage and a text string for the encoded message. 
  *
  */
 class DataMatrix implements BarcodeIO
