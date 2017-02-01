@@ -29,12 +29,11 @@ public class TestDataMatrix
    public void testGernerateImageFromText()
    {
       DataMatrix dm = new DataMatrix("What a great resume builder this is!");
-      dm.displayTextToConsole();
+     // dm.displayTextToConsole();
       dm.generateImageFromText();
-      dm.translateImageToText();
+     dm.translateImageToText();
       dm.displayImageToConsole();
 
-      dm.translateImageToText();
       dm.displayTextToConsole();
       // assertEquals("You did it! Great work. Celebrate.",
       // dm.displayTextToConsole());

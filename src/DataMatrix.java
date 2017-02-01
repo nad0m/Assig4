@@ -1,6 +1,3 @@
-/**
- * 
- */
 
 /**
  * @author BigMac
@@ -47,9 +44,8 @@ class DataMatrix implements BarcodeIO
    {
       this();
       readText(text);
-      // this is for testing.
       generateImageFromText();
-      scan(image);
+     // scan(image);
    }
 
    /**
