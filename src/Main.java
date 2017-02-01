@@ -25,6 +25,7 @@ public class Main
          "                                               "
 
       };
+      
 
       String[] sImageIn_2 =
       { "                                          ",
@@ -69,7 +70,6 @@ public class Main
       dm.displayImageToConsole();
 
       // more test
-      System.out.println("more test");
       dm.translateImageToText();
       dm.displayTextToConsole();
 
