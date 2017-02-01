@@ -40,7 +40,7 @@ public class TestDataMatrix
       //dm.displayTextToConsole();
        
        dm2.generateImageFromText();
-      dm2.translateImageToText();
+     // dm2.translateImageToText();
       dm2.displayImageToConsole();
 
        dm2.displayTextToConsole();

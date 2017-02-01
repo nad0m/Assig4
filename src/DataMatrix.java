@@ -43,12 +43,7 @@ class DataMatrix implements BarcodeIO
    DataMatrix(String text)
    {
       this();
-      readText(text);
-      generateImageFromText();
-      this.displayImageToConsole();
-      
-      translateImageToText();
-     // scan(image);
+      this.readText(text);
    }
 
    /**
